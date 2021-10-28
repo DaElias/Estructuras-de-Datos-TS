@@ -1,14 +1,4 @@
 "use strict";
-var Nodo = /** @class */ (function () {
-    function Nodo(item) {
-        this.data = item;
-        this.next = null;
-    }
-    Nodo.prototype.toString = function () {
-        return this.data;
-    };
-    return Nodo;
-}());
 var ListaCircle = /** @class */ (function () {
     function ListaCircle() {
         this.cursor = new Nodo(null);
@@ -25,8 +15,8 @@ var ListaCircle = /** @class */ (function () {
             this.cursor = nuevo;
         }
     };
-    ListaCircle.prototype.get = function (elemt) {
-        throw new Error("Method not implemented.");
+    ListaCircle.prototype.get = function () {
+        return this.cursor.data;
     };
     ListaCircle.prototype.show = function () {
         if (!this.isEmpty()) {
@@ -42,18 +32,17 @@ var ListaCircle = /** @class */ (function () {
         return "";
     };
     ListaCircle.prototype.delete = function () {
-        throw new Error("Method not implemented.");
+        if (!this.isEmpty()) {
+            if (this.cursor.next === null) {
+                this.cursor.data = null;
+            }
+            else {
+                this.cursor = this.cursor.next;
+            }
+        }
     };
     ListaCircle.prototype.isEmpty = function () {
         return this.cursor.data === null;
     };
     return ListaCircle;
 }());
-// Test 
-console.log("Test");
-var lista = new ListaCircle();
-lista.add(1);
-lista.add(2);
-lista.add(3);
-lista.add(4);
-console.log(lista.show());

@@ -1,31 +1,14 @@
-
-
 interface TadListaCircle<T> {
     add(elemt: T): void,
-    get(elemt: T): void,
+    get(): any,
     show(): string,
-    delete(): void
+    delete(): void,
     isEmpty(): boolean
 }
 
-class Nodo<T> {
-    public data: any;
-    public next: Nodo<T> | any;
-
-    constructor(item: any) {
-        this.data = item;
-        this.next = null;
-    }
-
-    public toString(): string {
-        return this.data;
-    }
-}
-
-
 class ListaCircle<T> implements TadListaCircle<T> {
 
-    public cursor: Nodo<T>;
+    private cursor: Nodo<T>;
 
     constructor() {
         this.cursor = new Nodo(null);
@@ -43,8 +26,8 @@ class ListaCircle<T> implements TadListaCircle<T> {
             this.cursor = nuevo;
         }
     }
-    get(elemt: T): void {
-        throw new Error("Method not implemented.");
+    get() {
+        return this.cursor.data;
     }
     show(): string {
         if (!this.isEmpty()) {
@@ -60,25 +43,18 @@ class ListaCircle<T> implements TadListaCircle<T> {
         return "";
     }
     delete(): void {
-        throw new Error("Method not implemented.");
+        if(!this.isEmpty()){
+            if(this.cursor.next===null){
+                this.cursor.data=null;
+            }else{
+                this.cursor=this.cursor.next;
+            }
+        }
     }
     isEmpty(): boolean {
         return this.cursor.data === null;
     }
 
-
-
 }
 
-// Test 
-console.log("Test")
-const lista = new ListaCircle();
-lista.add(1);
-lista.add(2);
-lista.add(3);
-lista.add(4);
 
-
-
-
-console.log(lista.show());
